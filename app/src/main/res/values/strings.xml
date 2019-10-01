@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TaskManager</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_text_log_in">Log in</string>
+    <string name="button_text_signup">Sign UP</string>
+    <string name="textview_text_title">Title</string>
+    <string name="checkbox_text">Done</string>
+    <string name="button_text_cancel">Cancel</string>
+    <string name="button_text_save">Save</string>
+    <string name="textview_text_description">Description</string>
+    <string name="username">User name</string>
+    <string name="password">Password</string>
+</resources>
