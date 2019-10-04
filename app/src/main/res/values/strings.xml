@@ -2,7 +2,7 @@
     <string name="app_name">TaskManager</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="button_text_log_in">Log in</string>
     <string name="button_text_signup">Sign UP</string>
     <string name="textview_text_title">Title</string>
@@ -12,4 +12,8 @@
     <string name="textview_text_description">Description</string>
     <string name="username">User name</string>
     <string name="password">Password</string>
+    <string name="date">date</string>
+    <string name="time">time</string>
+    <string name="delete_all_tasks_title">Delete All Tasks</string>
+    <string name="sure_delete_tasks_msg">Are you sure to delete all tasks?</string>
 </resources>

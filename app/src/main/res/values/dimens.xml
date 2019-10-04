@@ -2,5 +2,7 @@
 <resources>
     <dimen name="margin_bottom">80dp</dimen>
     <dimen name="padding_edit_text">20dp</dimen>
+    <dimen name="padding_text_view">20dp</dimen>
+
     <dimen name="action_button_margin">20dp</dimen>
 </resources>
