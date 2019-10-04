@@ -1,27 +1,63 @@
 package com.example.taskmanager.model;
 
+import com.example.taskmanager.repository.TaskRepository;
+
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.UUID;
 
-public class Task {
-    private UUID uuid;
+public class Task implements Serializable {
+    private UUID taskUuid;
     private String mTitle;
     private String mDescription;
     private Date mDate;
     private Time mTime;
     private State mState;
 
-    public Task(String mTitle, String mDescription, Date mDate, State mState , Time mTime) {
+
+
+    private UUID userId;
+
+    public Task(){
+        taskUuid =UUID.randomUUID();
+        userId = TaskRepository.getInstance().getUser().getUserId();
+    }
+    public Task(String mTitle, String mDescription, Date mDate, State mState , Time mTime ,User user) {
+        taskUuid =UUID.randomUUID();
         this.mTitle = mTitle;
         this.mDescription = mDescription;
         this.mDate = mDate;
         this.mTime = mTime;
         this.mState = mState;
+        userId = user.getUserId();
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
+
+    public void setDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public void setDate(Date mDate) {
+        this.mDate = mDate;
+    }
+
+    public void setTime(Time mTime) {
+        this.mTime = mTime;
+    }
+
+    public void setState(State mState) {
+        this.mState = mState;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+    public UUID getTaskUuid() {
+        return taskUuid;
     }
 
     public String getTitle() {
