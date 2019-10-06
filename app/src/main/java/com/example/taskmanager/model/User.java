@@ -1,7 +1,5 @@
 package com.example.taskmanager.model;
 
-import androidx.annotation.Nullable;
-
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -35,14 +33,4 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        return this.userId.equals(((User)obj).getUserId());
-    }
-
 }
