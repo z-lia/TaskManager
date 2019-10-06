@@ -45,8 +45,8 @@ public class Task implements Serializable {
         this.mDate = mDate;
     }
 
-    public void setTime(Time mTime) {
-        this.mTime = mTime;
+    public void setTime(Time time) {
+        this.mTime = time;
     }
 
     public void setState(State mState) {

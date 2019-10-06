@@ -14,8 +14,14 @@ import android.view.ViewGroup;
 
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.model.State;
+import com.example.taskmanager.model.Task;
+import com.example.taskmanager.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,13 +29,16 @@ import com.google.android.material.tabs.TabLayout;
 public class TaskTabPagerFragment extends Fragment {
     private ViewPager viewPager ;
     private TabLayout tabLayout;
-    private FloatingActionButton floatingActionButton_add;
+//    private FloatingActionButton floatingActionButton_add;
+    private User mUser;
+    public static final String ARG_USER = "mUser";
 
 
-    public static TaskTabPagerFragment newInstance() {
+    public static TaskTabPagerFragment newInstance(User user) {
 
         Bundle args = new Bundle();
 
+        args.putSerializable(ARG_USER , user);
         TaskTabPagerFragment fragment = new TaskTabPagerFragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,8 +56,9 @@ public class TaskTabPagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tas_tabk_pager, container, false);
         tabLayout = view.findViewById(R.id.tab_layout);
         viewPager = view.findViewById(R.id.view_pager);
-        floatingActionButton_add= view.findViewById(R.id.float_button_add);
+//        floatingActionButton_add= view.findViewById(R.id.float_button_add);
 
+        mUser = (User) getArguments().getSerializable(ARG_USER);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new FragmentStatePagerAdapter(getActivity().getSupportFragmentManager()) {
 
@@ -74,8 +84,24 @@ public class TaskTabPagerFragment extends Fragment {
             @Override
             public Fragment getItem(int position) {
 
+                State state =State.ToDo;
+                switch (position){
+                    case 0:
+                        state = State.ToDo;
+                        break;
+                    case 1:
+                        state = State.Doing;
+                        break;
+
+                    case 2:
+                        state = State.Done;
+                        break;
+                }
+                //in list ro por konam
+                //List<Task> taskList = new ArrayList<>();
+
                 //recycler view
-                return TaskListFragment.newInstance();
+                return TaskListFragment.newInstance(state);
             }
 
             @Override
@@ -84,13 +110,13 @@ public class TaskTabPagerFragment extends Fragment {
             }
         });
 
-        floatingActionButton_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TaskDialogFragment taskDialogFragment = TaskDialogFragment.newInstance();
-                taskDialogFragment.show(getActivity().getSupportFragmentManager() , "Tag");
-            }
-        });
+//        floatingActionButton_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                TaskDialogFragment taskDialogFragment = TaskDialogFragment.newInstance();
+//                taskDialogFragment.show(getActivity().getSupportFragmentManager() , "Tag");
+//            }
+//        });
 
         return view;
     }

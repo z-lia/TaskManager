@@ -1,6 +1,5 @@
 package com.example.taskmanager.controller;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +13,7 @@ import android.widget.EditText;
 
 import com.example.taskmanager.R;
 import com.example.taskmanager.model.User;
+import com.example.taskmanager.repository.TaskRepository;
 import com.example.taskmanager.repository.UsersRepository;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -51,6 +51,13 @@ public class LoginFragment extends Fragment {
         editText_password = view.findViewById(R.id.edit_text_password_login);
         editText_username = view.findViewById(R.id.edit_text_username_login);
 
+        setListener();
+
+        return view;
+    }
+
+    private void setListener() {
+
         button_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,14 +66,16 @@ public class LoginFragment extends Fragment {
 //                 if(username !="" && password!="") {
                 if( !username.equals("") && !password.equals("")) {
                     User user = new User(username , password);
-                   int result=  UsersRepository.getInstance().searchUserName(user);
-                   if(result == -1) {
-                       UsersRepository.getInstance().insertUser(user);
-                       Intent intent = TaskActivity.newIntent(getActivity());
-                       startActivity(intent);
-                   }
-                   else
-                       Snackbar.make(view , "This User has already signed up!" , Snackbar.LENGTH_SHORT).show();
+                    int result=  UsersRepository.getInstance().searchUserName(user);
+                    if(result == -1) {
+
+                        UsersRepository.getInstance().insertUser(user);
+                        TaskRepository.getInstance().setUser(user);
+                        Intent intent = TaskActivity.newIntent(getActivity() , user);
+                        startActivity(intent);
+                    }
+                    else
+                        Snackbar.make(view , "This User has already signed up!" , Snackbar.LENGTH_SHORT).show();
                 }
                 else {
                     Snackbar.make(view , "User name or password is empty" , Snackbar.LENGTH_SHORT).show();
@@ -87,7 +96,8 @@ public class LoginFragment extends Fragment {
                     int result=  UsersRepository.getInstance().searchUserName(user);
                     if(result == 1)
                     {
-                        Intent intent = TaskActivity.newIntent(getActivity());
+                        TaskRepository.getInstance().setUser(user);
+                        Intent intent = TaskActivity.newIntent(getActivity() ,user);
                         startActivity(intent);
                     }
 //                        UsersRepository.getInstance().insertUser(user);
@@ -103,9 +113,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
-
-        return view;
     }
 
 }

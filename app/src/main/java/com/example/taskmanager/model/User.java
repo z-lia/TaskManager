@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class User implements Serializable {
+    public UUID getUserId() {
+        return userId;
+    }
+
     private UUID userId;
     private String name;
     private String password;

@@ -20,8 +20,7 @@ public class TaskRepository {
 
     public static TaskRepository getInstance() {
         if (instance == null)
-            return new TaskRepository();
-        else
+            instance = new TaskRepository();
             return instance;
     }
 
@@ -53,7 +52,8 @@ public class TaskRepository {
     public List<Task> getTasks(State state) {
         List<Task> tasksOfCurrentUser = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getUserId().equals(mUser.getUserId()) && tasks.get(i).getState().equals(state))
+            if (tasks.get(i).getUserId().equals(mUser.getUserId()))
+                if( tasks.get(i).getState().equals(state))
                 tasksOfCurrentUser.add(tasks.get(i));
         }
         return tasksOfCurrentUser;
